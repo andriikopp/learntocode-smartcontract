@@ -5,7 +5,7 @@ pragma solidity ^0.5.1;
 //
 // Programming tasks for beginners
 //
-contract LearnToCodeProblems {
+contract KodxlernContract {
     // problems
     mapping (uint256 => string) private problems;
     

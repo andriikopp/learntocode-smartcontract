@@ -48,4 +48,9 @@ contract KodxlernContract {
     function authorBalance(address author) public view returns (uint256) {
         return authors[author];
     }
+    
+    // get total problems
+    function total() public view returns (uint256) {
+        return last;
+    }
 }

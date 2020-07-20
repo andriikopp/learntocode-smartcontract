@@ -6,14 +6,18 @@ pragma solidity ^0.5.1;
 // Programming tasks for beginners
 //
 contract KodxlernContract {
+    // contract owner
+    address private _owner;
+
     // problems
     mapping (uint256 => string) private problems;
     
     // last index
     uint256 private last = 0;
     
-    // tasks authors
-    mapping (address => uint256) private authors;
+    constructor() public {
+        _owner = msg.sender;
+    }
     
 	// get problem by its number
     function practice(uint256 problem) public view returns (string memory) {
@@ -26,27 +30,19 @@ contract KodxlernContract {
     
     // add new problem
     function add(string memory problem) public payable {
-        last = last + 1;
-        problems[last] = problem;
-        authors[msg.sender] += 1;
+        if (_owner == msg.sender) {
+            last = last + 1;
+            problems[last] = problem;
+        }
     }
     
     // replace existing problem
     function replace(string memory problem, uint256 id) public payable {
-        if (id >= 1 || id <= last) {
-            problems[id] = problem;
-            authors[msg.sender] += 1;
+        if (_owner == msg.sender) {
+            if (id >= 1 || id <= last) {
+                problems[id] = problem;
+            }
         }
-    }
-    
-    // get sender balance
-    function balance() public view returns (uint256) {
-        return authors[msg.sender];
-    }
-    
-    // get author balance
-    function authorBalance(address author) public view returns (uint256) {
-        return authors[author];
     }
     
     // get total problems
